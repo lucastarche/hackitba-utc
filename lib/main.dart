@@ -8,6 +8,12 @@ import 'redux/store_content.dart';
 import 'redux/reducer.dart';
 import 'page_view/page_view.dart';
 
+import 'package:flutter/services.dart' show rootBundle;
+
+Future<String> getJson() {
+  return rootBundle.loadString('json_data.json');
+}
+
 void main() {
   final store = Store<StoreContent>(mainReducer,
       initialState: StoreContent(
@@ -26,9 +32,9 @@ void main() {
           RegExp(r"^https://www.instagram.com"),
           RegExp(r"^https://www.netflix.com"),
           RegExp(r"^https://www.bancogalicia.com"),
-          RegExp(r"^https://www.twitter.com"),
-          RegExp(r"^https://www.youtube.com"),
-          RegExp(r"^https://es.wikipedia.com")
+          RegExp(r"^https://mobile.twitter.com"),
+          RegExp(r"^https://m.youtube.com"),
+          RegExp(r"^https://es.m.wikipedia.org"),
         ],
         controller: Completer(),
       ),
