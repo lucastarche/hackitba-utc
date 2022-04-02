@@ -3,8 +3,24 @@ import 'app.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      home: App(),
+    MaterialApp(
+      home: const App(),
+      theme: ThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            padding: MaterialStateProperty.all(
+              EdgeInsets.all(15),
+            ),
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+            padding: MaterialStateProperty.all(
+              EdgeInsets.all(15),
+            ),
+          ),
+        ),
+      ),
     ),
   );
 }
