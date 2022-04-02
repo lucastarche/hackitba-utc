@@ -32,17 +32,17 @@ class LoginScreen extends StatelessWidget {
                 final String password = 'password';
 
                 // Login with the username and password
-                final AuthResult result = await auth.signInWithEmailAndPassword(
+                final UserCredential result = await auth.signInWithEmailAndPassword(
                   email: username,
                   password: password,
                 );
 
                 // Get the user
-                final FirebaseUser user = result.user;
+                final User? user = result.user;
 
                 // Check if the user is logged in
                 if (user != null) {
-                  print('Logged in');
+                  debugPrint('Logged in');
                 }
               },
             ),
