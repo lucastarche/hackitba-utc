@@ -36,22 +36,37 @@ class _WebPageViewState extends State<WebPageView> {
           widget.controller.complete(webViewController);
         },
         navigationDelegate: (request) {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           for (final url in widget.validUrls) {
             if (url.hasMatch(request.url)) {
+              if (url.hasMatch("https://www.instagram.com")) {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(SnackBar(
+                    content: const Text(
+                      "Tu usuario es \"sandrita123\", y tu contraseña es \"bc7@eb2kl(ad1!5\"",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    action: SnackBarAction(
+                        label: "OK",
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        }),
+                    duration: const Duration(days: 1000),
+                  ));
+              }
               return NavigationDecision.navigate;
             }
           }
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              const SnackBar(
-                backgroundColor: Colors.red,
-                content: Text(
-                  'Esta página es insegura\nEl administrador será notificado para revisar su seguridad.',
-                  style: TextStyle(fontSize: 20),
-                ),
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(
+                'Esta página es insegura\nEl administrador será notificado para revisar su seguridad.',
+                style: TextStyle(fontSize: 20),
               ),
-            );
+            ),
+          );
           debugPrint("Prevented navigation to ${request.url}");
           return NavigationDecision.prevent;
         },
