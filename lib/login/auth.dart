@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 FirebaseAuth auth = FirebaseAuth.instance;
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen ({ Key? key }) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,16 +15,12 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextField(
-              decoration: InputDecoration(
-                hintText: 'Username'
-              ),
+              decoration: InputDecoration(hintText: 'Username'),
             ),
             TextField(
-              decoration: InputDecoration(
-                hintText: 'Password'
-              ),
+              decoration: InputDecoration(hintText: 'Password'),
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Login'),
               onPressed: () async {
                 // Get the username and password
