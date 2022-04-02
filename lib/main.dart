@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hackitba_utc/login/login_screen.dart';
 import 'package:redux/redux.dart';
 
@@ -10,24 +11,28 @@ void main() {
       initialState: StoreContent(
         users: [
           User(email: "ulilopezpacho@gmail.com", password: "@dminito2"),
+          User(email: "lucastarche@gmail.com", password: "@dminito3"),
         ],
       ));
 
   runApp(
-    MaterialApp(
-      home: const LoginScreen(),
-      theme: ThemeData(
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.all(15),
+    StoreProvider<StoreContent>(
+      store: store,
+      child: MaterialApp(
+        home: const LoginScreen(),
+        theme: ThemeData(
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(
+                const EdgeInsets.all(15),
+              ),
             ),
           ),
-        ),
-        outlinedButtonTheme: OutlinedButtonThemeData(
-          style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.all(15),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(
+                const EdgeInsets.all(15),
+              ),
             ),
           ),
         ),
