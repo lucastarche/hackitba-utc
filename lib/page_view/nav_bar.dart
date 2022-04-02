@@ -11,26 +11,31 @@ Widget generateNavigationBar(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _generateNavigationButton(
+          context,
           controller,
           "assets/logo_google.png",
           "https://www.google.com",
         ),
         _generateNavigationButton(
+          context,
           controller,
           "assets/logo_facebook.png",
           "https://m.facebook.com",
         ),
         _generateNavigationButton(
+          context,
           controller,
           "assets/logo_instagram.png",
           "https://www.instagram.com",
         ),
         _generateNavigationButton(
+          context,
           controller,
           "assets/logo_gmail.png",
           "https://mail.google.com",
         ),
         _generateNavigationButton(
+          context,
           controller,
           "assets/logo_netflix.png",
           "https://www.netflix.com",
@@ -42,54 +47,67 @@ Widget generateNavigationBar(
               context: context,
               builder: (BuildContext context) {
                 return SizedBox(
-                    height: 800,
-                    child: GridView.count(crossAxisCount: 4, children: [
+                  height: 800,
+                  child: GridView.count(
+                    crossAxisCount: 4,
+                    children: [
                       _generateNavigationButton(
+                        context,
                         controller,
                         "assets/logo_google.png",
                         "https://www.google.com",
                       ),
                       _generateNavigationButton(
+                        context,
                         controller,
                         "assets/logo_facebook.png",
                         "https://m.facebook.com",
                       ),
                       _generateNavigationButton(
+                        context,
                         controller,
                         "assets/logo_instagram.png",
                         "https://www.instagram.com",
                       ),
                       _generateNavigationButton(
+                        context,
                         controller,
                         "assets/logo_gmail.png",
                         "https://mail.google.com",
                       ),
                       _generateNavigationButton(
+                        context,
                         controller,
                         "assets/logo_netflix.png",
                         "https://www.netflix.com",
                       ),
                       _generateNavigationButton(
+                        context,
                         controller,
                         "assets/logo_bancogalicia.png",
                         "https://www.bancogalicia.com",
                       ),
                       _generateNavigationButton(
+                        context,
                         controller,
                         "assets/logo_twitter.png",
                         "https://www.twitter.com",
                       ),
                       _generateNavigationButton(
+                        context,
                         controller,
                         "assets/logo_youtube.png",
                         "https://m.youtube.com",
                       ),
                       _generateNavigationButton(
+                        context,
                         controller,
                         "assets/logo_wikipedia.png",
                         "https://es.m.wikipedia.org",
                       ),
-                    ]));
+                    ],
+                  ),
+                );
               },
             );
           },
@@ -100,12 +118,14 @@ Widget generateNavigationBar(
 }
 
 IconButton _generateNavigationButton(
+  BuildContext context,
   Completer<WebViewController> controller,
   String iconPath,
   String url,
 ) {
   return IconButton(
     onPressed: () async {
+      Navigator.pop(context);
       final webViewController = await controller.future;
       webViewController.loadUrl(url);
     },

@@ -41,6 +41,17 @@ class _WebPageViewState extends State<WebPageView> {
               return NavigationDecision.navigate;
             }
           }
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              const SnackBar(
+                backgroundColor: Colors.red,
+                content: Text(
+                  'Esta página es insegura\nEl administrador será notificado para revisar su seguridad.',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            );
           debugPrint("Prevented navigation to ${request.url}");
           return NavigationDecision.prevent;
         },
