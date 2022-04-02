@@ -28,13 +28,13 @@ class LoginScreen extends StatelessWidget {
                 final String password = 'password';
 
                 // Login with the username and password
-                final result = await auth.signInWithEmailAndPassword(
+                final UserCredential result = await auth.signInWithEmailAndPassword(
                   email: username,
                   password: password,
                 );
 
                 // Get the user
-                final user = result.user;
+                final User? user = result.user;
 
                 // Check if the user is logged in
                 if (user != null) {
