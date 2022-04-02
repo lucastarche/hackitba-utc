@@ -21,7 +21,6 @@ AppBar generateAppBar(Completer<WebViewController> controller) {
           webViewController.goForward();
         },
       ),
-      //Add reload button
       IconButton(
         icon: const Icon(Icons.refresh),
         onPressed: () async {

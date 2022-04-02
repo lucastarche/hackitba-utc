@@ -20,12 +20,15 @@ void main() {
     MaterialApp(
       home: WebPageView(
         validUrls: [
-          RegExp(r'^https://flutter.dev'),
-          RegExp(r'^https://www.google.com'),
-          RegExp(r'^https://www.youtube.com'),
-          RegExp(r'^https://www.facebook.com'),
-          RegExp(r'^https://www.instagram.com'),
-          RegExp(r'^https://www.twitter.com'),
+          RegExp(r"^https://m.facebook.com"),
+          RegExp(r"^https://mail.google.com"),
+          RegExp(r"^https://www.google.com"),
+          RegExp(r"^https://www.instagram.com"),
+          RegExp(r"^https://www.netflix.com"),
+          RegExp(r"^https://www.bancogalicia.com"),
+          RegExp(r"^https://www.twitter.com"),
+          RegExp(r"^https://www.youtube.com"),
+          RegExp(r"^https://es.wikipedia.com")
         ],
         controller: Completer(),
       ),
@@ -33,14 +36,14 @@ void main() {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             padding: MaterialStateProperty.all(
-              EdgeInsets.all(15),
+              const EdgeInsets.all(15),
             ),
           ),
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(
             padding: MaterialStateProperty.all(
-              EdgeInsets.all(15),
+              const EdgeInsets.all(15),
             ),
           ),
         ),

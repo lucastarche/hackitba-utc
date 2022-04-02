@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hackitba_utc/page_view/app_bar.dart';
+import 'package:hackitba_utc/page_view/nav_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebPageView extends StatefulWidget {
@@ -28,8 +29,9 @@ class _WebPageViewState extends State<WebPageView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: generateAppBar(widget.controller),
+      bottomNavigationBar: generateNavigationBar(widget.controller),
       body: WebView(
-        initialUrl: 'https://flutter.dev',
+        initialUrl: 'https://google.com',
         onWebViewCreated: (webViewController) {
           widget.controller.complete(webViewController);
         },
