@@ -2,7 +2,7 @@
 
 ## Proyecto: GrannyGrannyGo
 
-[](icon.svg)
+![Ícono](icon.svg)
 
 Nuestra idea consiste en un navegador seguro para personas mayores, que no necesariamente sean expertas en tecnología.
 Debido a los incesantes ciberataques que se realizan en el día a día, decidimos crear una experiencia cuyo principal objetivo es proteger a sus usuarios.
