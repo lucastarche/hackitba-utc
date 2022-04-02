@@ -1,9 +1,21 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
+
+import 'redux/store_content.dart';
+import 'redux/reducer.dart';
 import 'page_view/page_view.dart';
 
 void main() {
+  final store = Store<StoreContent>(mainReducer,
+      initialState: StoreContent(
+        users: [
+          User(email: "ulilopezpacho@gmail.com", password: "@dminito2"),
+        ],
+      ));
+
   runApp(
     MaterialApp(
       home: WebPageView(
