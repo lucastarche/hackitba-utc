@@ -31,7 +31,7 @@ class _WebPageViewState extends State<WebPageView> {
       appBar: generateAppBar(widget.controller),
       bottomNavigationBar: generateNavigationBar(context, widget.controller),
       body: WebView(
-        initialUrl: 'https://google.com',
+        initialUrl: 'https://www.google.com',
         onWebViewCreated: (webViewController) {
           widget.controller.complete(webViewController);
         },
@@ -55,6 +55,7 @@ class _WebPageViewState extends State<WebPageView> {
           debugPrint("Prevented navigation to ${request.url}");
           return NavigationDecision.prevent;
         },
+        javascriptMode: JavascriptMode.unrestricted,
       ),
     );
   }

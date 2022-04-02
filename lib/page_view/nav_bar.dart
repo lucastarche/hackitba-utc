@@ -125,7 +125,9 @@ IconButton _generateNavigationButton(
 ) {
   return IconButton(
     onPressed: () async {
-      Navigator.pop(context);
+      if (Navigator.canPop(context)) {
+        Navigator.pop(context);
+      }
       final webViewController = await controller.future;
       webViewController.loadUrl(url);
     },
