@@ -6,7 +6,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 AppBar generateAppBar(Completer<WebViewController> controller) {
   return AppBar(
     automaticallyImplyLeading: false,
-    title: const Text("Granny Granny Go"),
+    title: const Text("EasyWeb"),
     actions: <Widget>[
       IconButton(
         icon: const Icon(Icons.arrow_back),

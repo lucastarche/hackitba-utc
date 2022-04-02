@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 const Text(
-                  "¡Bienvenido a Granny Granny Go!",
+                  "¡Bienvenido a Easy Web!",
                   style: TextStyle(fontSize: 40),
                   textAlign: TextAlign.center,
                 ),
