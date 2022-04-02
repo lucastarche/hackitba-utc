@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'app.dart';
+import 'login/auth.dart';
 
 void main() {
   runApp(
     MaterialApp(
-      home: const App(),
+      home: const LoginScreen(),
       theme: ThemeData(
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
