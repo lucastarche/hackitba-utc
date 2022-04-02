@@ -10,26 +10,46 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(
-              labelText: 'Email',
+    return Scaffold(
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          child: Form(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                const Text(
+                  "¡Bienvenido a Granny Granny Go!",
+                  style: TextStyle(fontSize: 40),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 40),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(fontSize: 20),
+                    labelText: 'Email',
+                  ),
+                  style: const TextStyle(fontSize: 20),
+                ),
+                const SizedBox(height: 10),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(fontSize: 20),
+                    labelText: 'Password',
+                  ),
+                  style: const TextStyle(fontSize: 20),
+                  obscureText: true,
+                ),
+                const SizedBox(height: 30),
+                ElevatedButton(
+                  child: const Text('Acceder', style: TextStyle(fontSize: 24)),
+                  onPressed: () {},
+                ),
+              ],
             ),
           ),
-          TextFormField(
-            decoration: InputDecoration(
-              labelText: 'Password',
-            ),
-          ),
-          ElevatedButton(
-            child: Text('Login'),
-            onPressed: () {
-              
-            },
-          ),
-        ],
+        ),
       ),
     );
   }

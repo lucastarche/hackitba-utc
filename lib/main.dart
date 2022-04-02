@@ -8,12 +8,6 @@ import 'redux/store_content.dart';
 import 'redux/reducer.dart';
 import 'page_view/page_view.dart';
 
-import 'package:flutter/services.dart' show rootBundle;
-
-Future<String> getJson() {
-  return rootBundle.loadString('json_data.json');
-}
-
 void main() {
   final store = Store<StoreContent>(mainReducer,
       initialState: StoreContent(
