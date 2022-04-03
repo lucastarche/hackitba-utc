@@ -8,7 +8,7 @@ Future<String> sendCheckRequest(String title) async {
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body:
-        '{"urlInfo": {"url": "$title"}, "apiKey": "jbj9yuokbsyej2yoavdfvn8rl93kjujf3htkx49z3nvaxazp889pbjdng65vwnhy"}',
+        '{"urlInfo": {"url": "$title"}, "apiKey": "8th2dvxiwxnj2pxs8xx0n58x9sxqpm0kijex4u748daccg3ypwovb20kdfvqg52l"}',
   );
 
   if (response.statusCode == 200) {
@@ -26,7 +26,7 @@ Future<String?> retrieveCheckRequest(String jobID) async {
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body:
-        '{"apiKey": "jbj9yuokbsyej2yoavdfvn8rl93kjujf3htkx49z3nvaxazp889pbjdng65vwnhy", "jobID": "$jobID"}',
+        '{"apiKey": "8th2dvxiwxnj2pxs8xx0n58x9sxqpm0kijex4u748daccg3ypwovb20kdfvqg52l", "jobID": "$jobID"}',
   );
   if (response.statusCode == 200) {
     Map<String, dynamic> data = json.decode(response.body);
