@@ -6,10 +6,15 @@ import 'package:hackitba_utc/page_view/nav_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebPageView extends StatefulWidget {
+  final bool isError;
   final List<RegExp> validUrls;
   final Completer<WebViewController> controller;
+
   const WebPageView(
-      {Key? key, required this.validUrls, required this.controller})
+      {Key? key,
+      this.isError = false,
+      required this.validUrls,
+      required this.controller})
       : super(key: key);
 
   @override
@@ -34,6 +39,9 @@ class _WebPageViewState extends State<WebPageView> {
         initialUrl: 'https://www.google.com',
         onWebViewCreated: (webViewController) {
           widget.controller.complete(webViewController);
+          if (widget.isError) {
+            _showInvalidPage(context);
+          }
         },
         navigationDelegate: (request) {
           for (final url in widget.validUrls) {
@@ -41,22 +49,26 @@ class _WebPageViewState extends State<WebPageView> {
               return NavigationDecision.navigate;
             }
           }
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              const SnackBar(
-                backgroundColor: Colors.red,
-                content: Text(
-                  'Esta página es insegura\nEl administrador será notificado para revisar su seguridad.',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            );
-          debugPrint("Prevented navigation to ${request.url}");
+          _showInvalidPage(context);
+
           return NavigationDecision.prevent;
         },
         javascriptMode: JavascriptMode.unrestricted,
       ),
     );
+  }
+
+  void _showInvalidPage(BuildContext context) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            'Esta página es insegura\nEl administrador será notificado para revisar su seguridad.',
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
+      );
   }
 }

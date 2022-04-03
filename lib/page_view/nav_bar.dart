@@ -62,9 +62,35 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       builder: (BuildContext context) {
         return Container(
           height: 800,
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
+              const SizedBox(height: 20),
+              TextField(
+                controller: _urlController,
+                decoration: InputDecoration(
+                  hintText: "Ex: https://www.google.com",
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: Colors.blue, width: 3.0),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: Colors.blueAccent, width: 3.0),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              OutlinedButton(
+                onPressed: () {
+                  _navigateTo(context, _urlController.text);
+                  _urlController.clear();
+                },
+                child: const Text("Buscar"),
+              ),
+              const SizedBox(height: 20),
               SizedBox(
                 height: 350,
                 child: GridView.count(
@@ -118,28 +144,6 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                   ],
                 ),
               ),
-              TextField(
-                controller: _urlController,
-                decoration: InputDecoration(
-                  hintText: "Ex: https://www.google.com",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 3.0),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.blueAccent, width: 3.0),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              OutlinedButton(
-                  onPressed: () {
-                    _navigateTo(context, _urlController.text);
-                    _urlController.clear();
-                  },
-                  child: Text("Buscar")),
             ],
           ),
         );
