@@ -1,4 +1,5 @@
 # UTC - Únicamente Tenemos Código
+Desarrollado por: Lucas Hernán Tarche, Ulises López Pacholczak y Juan Ignacio Cantarella.
 
 ## Proyecto: Easy Web
 
