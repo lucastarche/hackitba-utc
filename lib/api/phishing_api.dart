@@ -40,10 +40,8 @@ Future<bool> isSafeURL(String url) async {
   String? disposition = await sendCheckRequest(url);
   String? state = null;
   while (state == null) {
+    await Future.delayed(const Duration(milliseconds: 300));
     state = await retrieveCheckRequest(disposition);
-    if (state == null) {
-      await Future.delayed(const Duration(milliseconds: 300));
-    }
   }
   return state == "clean";
 }
