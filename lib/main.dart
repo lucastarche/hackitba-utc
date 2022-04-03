@@ -13,8 +13,8 @@ void main() {
   final store = Store<StoreContent>(mainReducer,
       initialState: StoreContent(
         users: [
-          User(email: "ulilopezpacho@gmail.com", password: "abc", isAdmin: false),
-          User(email: "lucastarche@gmail.com", password: "abc", isAdmin: true),
+          User(email: "ulilopezpacho@gmail.com", password: "abcd", isAdmin: false),
+          User(email: "lucastarche@gmail.com", password: "abcd", isAdmin: true),
         ],
         webPages: [
           WebPageElement(url: "https://www.google.com", title: "Google"),
