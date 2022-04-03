@@ -67,6 +67,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             children: [
               const SizedBox(height: 20),
               TextField(
+                autocorrect: false,
                 controller: _urlController,
                 decoration: InputDecoration(
                   hintText: "Ex: https://www.google.com",
