@@ -44,13 +44,29 @@ class _WebPageViewState extends State<WebPageView> {
           }
         },
         navigationDelegate: (request) {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           for (final url in widget.validUrls) {
             if (url.hasMatch(request.url)) {
+              if (url.hasMatch("https://www.instagram.com")) {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(SnackBar(
+                    content: const Text(
+                      "Tu usuario es \"sandrita123\", y tu contraseña es \"bc7@eb2kl(ad1!5\"",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    action: SnackBarAction(
+                        label: "OK",
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        }),
+                    duration: const Duration(days: 1000),
+                  ));
+              }
               return NavigationDecision.navigate;
             }
           }
           _showInvalidPage(context);
-
           return NavigationDecision.prevent;
         },
         javascriptMode: JavascriptMode.unrestricted,

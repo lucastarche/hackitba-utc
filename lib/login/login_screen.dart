@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:hackitba_utc/admin/admin.dart';
 import 'package:hackitba_utc/page_view/page_view.dart';
 
 import '../redux/store_content.dart';
@@ -74,16 +75,30 @@ class _LoginScreenState extends State<LoginScreen> {
                         const Text('Acceder', style: TextStyle(fontSize: 24)),
                     onPressed: () {
                       if (!_formKey.currentState!.validate()) return;
-                      final userExists = StoreProvider.of<StoreContent>(context)
+                      final user = StoreProvider.of<StoreContent>(context)
                           .state
                           .users
-                          .any((element) =>
-                              element.email == _emailController.text &&
-                              element.password == _passwordController.text);
+                          .firstWhere(
+                            (element) =>
+                                element.email == _emailController.text &&
+                                element.password == _passwordController.text,
+                            orElse: () =>
+                                User(email: "", password: "", isAdmin: false),
+                          );
 
-                      if (!userExists) return;
+                      if (user.email == "") return;
 
                       if (Navigator.canPop(context)) Navigator.pop(context);
+
+                      if (user.isAdmin) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AdminView()),
+                            (route) => false);
+                        return;
+                      }
+
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
