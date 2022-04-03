@@ -5,7 +5,10 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   final Completer<WebViewController> controller;
-  const CustomNavigationBar({Key? key, required this.controller})
+  final VoidCallback onNavigateStart;
+
+  const CustomNavigationBar(
+      {Key? key, required this.controller, required this.onNavigateStart})
       : super(key: key);
 
   @override
@@ -168,6 +171,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     BuildContext context,
     String url,
   ) async {
+    widget.onNavigateStart();
     if (Navigator.canPop(context)) {
       Navigator.pop(context);
     }

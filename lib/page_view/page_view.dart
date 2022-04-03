@@ -23,6 +23,7 @@ class WebPageView extends StatefulWidget {
 }
 
 class _WebPageViewState extends State<WebPageView> {
+  bool isLoading = true;
   @override
   void initState() {
     if (Platform.isAndroid) {
@@ -35,45 +36,75 @@ class _WebPageViewState extends State<WebPageView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: generateAppBar(widget.controller),
-      bottomNavigationBar: CustomNavigationBar(controller: widget.controller),
-      body: WebView(
-        initialUrl: 'https://www.google.com',
-        onWebViewCreated: (webViewController) {
-          widget.controller.complete(webViewController);
-          if (widget.isError) {
-            _showInvalidPage(context);
-          }
-        },
-        navigationDelegate: (request) async {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          for (final url in widget.validUrls) {
-            if (url.hasMatch(request.url)) {
-              if (url.hasMatch("https://www.instagram.com")) {
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(SnackBar(
-                    content: const Text(
-                      "Tu usuario es \"sandrita123\", y tu contraseña es \"bc7@eb2kl(ad1!5\"",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    action: SnackBarAction(
-                        label: "OK",
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        }),
-                    duration: const Duration(days: 1000),
-                  ));
+      bottomNavigationBar: CustomNavigationBar(
+        controller: widget.controller,
+        onNavigateStart: () => setState(() => isLoading = true),
+      ),
+      body: Stack(
+        children: [
+          WebView(
+            initialUrl: 'https://www.google.com',
+            onWebViewCreated: (webViewController) {
+              widget.controller.complete(webViewController);
+              if (widget.isError) {
+                _showInvalidPage(context);
               }
-              return NavigationDecision.navigate;
-            }
-          }
+            },
+            onPageStarted: (_) => setState(() => isLoading = true),
+            onPageFinished: (_) => setState(() => isLoading = false),
+            navigationDelegate: (request) async {
+              setState(() => isLoading = true);
 
-          if (await isSafeURL(request.url)) return NavigationDecision.navigate;
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              for (final url in widget.validUrls) {
+                if (url.hasMatch(request.url)) {
+                  if (url.hasMatch("https://www.instagram.com")) {
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(SnackBar(
+                        content: const Text(
+                          "Tu usuario es \"sandrita123\", y tu contraseña es \"bc7@eb2kl(ad1!5\"",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        action: SnackBarAction(
+                            label: "OK",
+                            onPressed: () {
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
+                            }),
+                        duration: const Duration(days: 1000),
+                      ));
+                  }
+                  return NavigationDecision.navigate;
+                }
+              }
 
-          _showInvalidPage(context);
-          return NavigationDecision.prevent;
-        },
-        javascriptMode: JavascriptMode.unrestricted,
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(const SnackBar(
+                  content: Text("Verificando si la página es segura..."),
+                  duration: Duration(days: 1000),
+                ));
+
+              if (await isSafeURL(request.url)) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                return NavigationDecision.navigate;
+              }
+
+              _showInvalidPage(context);
+              return NavigationDecision.prevent;
+            },
+            javascriptMode: JavascriptMode.unrestricted,
+          ),
+          isLoading
+              ? Center(
+                  child: Container(
+                      padding: EdgeInsets.all(50),
+                      decoration: BoxDecoration(color: Color(0x80000000)),
+                      child: CircularProgressIndicator()),
+                )
+              : const Center(),
+        ],
       ),
     );
   }
