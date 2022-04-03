@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hackitba_utc/page_view/app_bar.dart';
 import 'package:hackitba_utc/page_view/nav_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import '../api/phishing_api.dart';
 
 class WebPageView extends StatefulWidget {
   final bool isError;
@@ -43,7 +44,7 @@ class _WebPageViewState extends State<WebPageView> {
             _showInvalidPage(context);
           }
         },
-        navigationDelegate: (request) {
+        navigationDelegate: (request) async {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           for (final url in widget.validUrls) {
             if (url.hasMatch(request.url)) {
@@ -66,6 +67,9 @@ class _WebPageViewState extends State<WebPageView> {
               return NavigationDecision.navigate;
             }
           }
+
+          if (await isSafeURL(request.url)) return NavigationDecision.navigate;
+
           _showInvalidPage(context);
           return NavigationDecision.prevent;
         },
