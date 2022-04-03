@@ -29,7 +29,7 @@ class _WebPageViewState extends State<WebPageView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: generateAppBar(widget.controller),
-      bottomNavigationBar: generateNavigationBar(context, widget.controller),
+      bottomNavigationBar: CustomNavigationBar(controller: widget.controller),
       body: WebView(
         initialUrl: 'https://www.google.com',
         onWebViewCreated: (webViewController) {
