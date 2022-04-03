@@ -13,4 +13,18 @@ Para brindar una experiencia intuitiva y _user friendly_, utilizamos **Material 
 ## Implementación
 
 Para implementar nuestro primer prototipo, utilizamos principalmente **Flutter** en conjunción con **Material UI**.
-Para poder correr HTML, CSS y JavaScript en una app nativa utilizamos **WebView**. Además, utilizamos **CheckPhish**, que es una API que utiliza inteligencia artificial para detectar sitios fraudulentos. El sistema de usuarios (aún en desarrollo) permite realizar un control familiar. Por último, mediante los archivos de configuración de Android (todavía lo estamos desarrollando para IOS) logramos que el sistema operativo interprete a la aplicación como un web browser, pudiendo abrir así diversos links con nuestra aplicación. Por cuestiones de tiempo, esta última funcionalidad se implementó de forma parcial.
+Para poder correr HTML, CSS y JavaScript en una app nativa utilizamos **WebView**. Además, utilizamos **CheckPhish**, que es una API que utiliza inteligencia artificial para detectar sitios fraudulentos.
+
+## Funcionalidades
+
+- Wrapper de Web Browser
+- API para la detección de phishing con IA (CheckPhish)
+- Sistema de usuarios de control familiar
+- Abrir hipervínculos externos a la aplicación
+- Sistema intuitivo de páginas frecuentemente utilizadas
+
+## TODO
+
+- Hostear sistema de usuarios en la nube. Actualmente es local
+- Terminar de implementar las funciones de abrir hipervínculos en IOS
+- Mejorar el código nativo de Android para poder acceder a la URL completa al momento de clickear un hipervínculo
