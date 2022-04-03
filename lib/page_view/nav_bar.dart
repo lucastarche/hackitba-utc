@@ -13,6 +13,8 @@ class CustomNavigationBar extends StatefulWidget {
 }
 
 class _CustomNavigationBarState extends State<CustomNavigationBar> {
+  final _urlController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -47,70 +49,101 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
           ),
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return SizedBox(
-                    height: 800,
-                    child: GridView.count(
-                      scrollDirection: Axis.horizontal,
-                      crossAxisCount: 4,
-                      children: [
-                        _generateNavigationButton(
-                          context,
-                          "assets/logo_google.png",
-                          "https://www.google.com",
-                        ),
-                        _generateNavigationButton(
-                          context,
-                          "assets/logo_facebook.png",
-                          "https://m.facebook.com",
-                        ),
-                        _generateNavigationButton(
-                          context,
-                          "assets/logo_instagram.png",
-                          "https://www.instagram.com",
-                        ),
-                        _generateNavigationButton(
-                          context,
-                          "assets/logo_gmail.png",
-                          "https://mail.google.com",
-                        ),
-                        _generateNavigationButton(
-                          context,
-                          "assets/logo_netflix.png",
-                          "https://www.netflix.com",
-                        ),
-                        _generateNavigationButton(
-                          context,
-                          "assets/logo_bancogalicia.png",
-                          "https://www.bancogalicia.com",
-                        ),
-                        _generateNavigationButton(
-                          context,
-                          "assets/logo_twitter.png",
-                          "https://www.twitter.com",
-                        ),
-                        _generateNavigationButton(
-                          context,
-                          "assets/logo_youtube.png",
-                          "https://m.youtube.com",
-                        ),
-                        _generateNavigationButton(
-                          context,
-                          "assets/logo_wikipedia.png",
-                          "https://es.m.wikipedia.org",
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
+            onPressed: () => _displayAppList(context),
           ),
         ],
       ),
+    );
+  }
+
+  void _displayAppList(context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 800,
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 350,
+                child: GridView.count(
+                  crossAxisCount: 4,
+                  children: [
+                    _generateNavigationButton(
+                      context,
+                      "assets/logo_google.png",
+                      "https://www.google.com",
+                    ),
+                    _generateNavigationButton(
+                      context,
+                      "assets/logo_facebook.png",
+                      "https://m.facebook.com",
+                    ),
+                    _generateNavigationButton(
+                      context,
+                      "assets/logo_instagram.png",
+                      "https://www.instagram.com",
+                    ),
+                    _generateNavigationButton(
+                      context,
+                      "assets/logo_gmail.png",
+                      "https://mail.google.com",
+                    ),
+                    _generateNavigationButton(
+                      context,
+                      "assets/logo_netflix.png",
+                      "https://www.netflix.com",
+                    ),
+                    _generateNavigationButton(
+                      context,
+                      "assets/logo_bancogalicia.png",
+                      "https://www.bancogalicia.com",
+                    ),
+                    _generateNavigationButton(
+                      context,
+                      "assets/logo_twitter.png",
+                      "https://www.twitter.com",
+                    ),
+                    _generateNavigationButton(
+                      context,
+                      "assets/logo_youtube.png",
+                      "https://m.youtube.com",
+                    ),
+                    _generateNavigationButton(
+                      context,
+                      "assets/logo_wikipedia.png",
+                      "https://es.m.wikipedia.org",
+                    ),
+                  ],
+                ),
+              ),
+              TextField(
+                controller: _urlController,
+                decoration: InputDecoration(
+                  hintText: "Ex: https://www.google.com",
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 3.0),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.blueAccent, width: 3.0),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              OutlinedButton(
+                  onPressed: () {
+                    _navigateTo(context, _urlController.text);
+                    _urlController.clear();
+                  },
+                  child: Text("Buscar")),
+            ],
+          ),
+        );
+      },
     );
   }
 
