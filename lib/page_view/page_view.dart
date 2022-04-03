@@ -55,10 +55,9 @@ class _WebPageViewState extends State<WebPageView> {
             navigationDelegate: (request) async {
               setState(() => isLoading = true);
 
-              ScaffoldMessenger.of(context).hideCurrentSnackBar();
               for (final url in widget.validUrls) {
                 if (url.hasMatch(request.url)) {
-                  if (url.hasMatch("https://www.instagram.com")) {
+                  if (url.hasMatch("https://www.netflix.com")) {
                     ScaffoldMessenger.of(context)
                       ..hideCurrentSnackBar()
                       ..showSnackBar(SnackBar(
@@ -79,15 +78,7 @@ class _WebPageViewState extends State<WebPageView> {
                 }
               }
 
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(const SnackBar(
-                  content: Text("Verificando si la página es segura..."),
-                  duration: Duration(days: 1000),
-                ));
-
               if (await isSafeURL(request.url)) {
-                ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 return NavigationDecision.navigate;
               }
 
@@ -101,7 +92,17 @@ class _WebPageViewState extends State<WebPageView> {
                   child: Container(
                       padding: EdgeInsets.all(50),
                       decoration: BoxDecoration(color: Color(0x80000000)),
-                      child: CircularProgressIndicator()),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CircularProgressIndicator(),
+                          SizedBox(height: 20),
+                          Text(
+                            "Verificando si la página es segura...",
+                            style: TextStyle(color: Colors.white),
+                          )
+                        ],
+                      )),
                 )
               : const Center(),
         ],
